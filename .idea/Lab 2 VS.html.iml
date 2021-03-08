@@ -1,8 +1,191 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<module type="WEB_MODULE" version="4">
-  <component name="NewModuleRootManager">
-    <content url="file://$USER_HOME$/Documents/SLIIT/3rd YEAR/1ST SEMESTER/Application Frameworks/week02/Lab 2 VS.html" />
-    <orderEntry type="inheritedJdk" />
-    <orderEntry type="sourceFolder" forTests="false" />
-  </component>
-</module>
+<html>
+    <head>
+        <ptitle>SLIIT</title>
+    </head>
+    <body>
+
+        <script>
+            //Lab 2
+            //1.	Promises/Asynchronous and callbacks
+//• Create a function that returns a value after 1 second (return inside a set Timeout).
+            function getValue () {
+                let value = 0;
+                setTimeout(function(){
+                    value = 20;
+                    console.log(value);
+                },2000);
+                return value;
+            }
+            console.log(getValue());
+
+            //Answer 0 and print 20 after 20000 ms
+
+
+//• Pass a callback (function) to the function created in the previous step and execute that function inside the timeout by passing the value.
+                function getValue (callback) {
+                let value = 0;
+                setTimeout(function(){
+                    value = 20;
+                    callback(value);
+                },2000);
+                return value;
+            }
+            console.log(getValue(function(nValue){
+                console.log("callback function" + nValue);
+            }));
+
+
+  //          Answer 0 callback function 20
+
+//•Now return a promise instead of accepting the callback
+  //          A promise is an object that may produce a single value some time in the future : either a resolved value, or a reason that it's not resolved (e.g., a network error occurred). ... Promise users can attach callbacks to handle the fulfilled value or the reason for rejection.
+
+            function getValue (callback) {
+                let value = 0;
+                return new Promise (function(resolve,reject){
+                    setTimeout(function(){
+                        value = 20;
+                        resolve(value);
+                    },3000);
+                });
+
+            }
+            getValue().then(function(value){
+                console.log(value);
+            });
+
+            console.log("Hello");
+
+
+
+    //    Answer hello and 20
+
+      //  • Let’s try to chain these promises.
+
+
+            function getValue (callback) {
+                let value = 0;
+                return new Promise (function(resolve,reject){
+                    setTimeout(function(){
+                        value = 20;
+                        resolve(value);
+                    },3000);
+                });
+
+            }
+            getValue().then(function(value){
+                console.log(value);
+                return + 200;
+            }), then(function(value){
+                consol.log(value);
+                return value + 200
+            }), then(function(value){
+                consol.log(value);
+            });
+
+            console.log("Hello");
+
+//        2.	Classes in JavaScript
+       // • Create a class named Vehicle using a function.
+        //• Add a property named type to the class (this.type). Assign a value to that variable using a constructor argument.
+
+        function Vehicle(type){
+        this.type=type;
+        }
+
+//        • Add a function to its prototype named drive (Vehicle.prototype.print...). Print ‘Vehicle is driving’ in the function body.
+        Vehicle.prototype.drive = function(){
+        console.log("Vehicle is driving");
+        }
+
+  //      • Add VehicleCount (Vehicle.VehicleCount) as a static variable.
+    //    • Increase the number of VehicleCount (Vehicle.VehicleCount++) by one inside the constructor.
+
+        //2
+        function Vehicle(type){
+        this.type=type;
+        //4
+        Vehicle.VehicleCount++;
+        }
+
+        //3
+        Vehicle.prototype.print = function(){
+        console.log("Vehicle is driving");
+        }
+
+        Vehicle.VehicleCount=0;
+
+        const vehicle = new Vehicle();
+
+        console.log(vehicle.VehicleCount);
+        vehicle.print();
+
+
+      //  • Create an object from Vehicle class (new Vehicle) and check static variable value, type property value and function work.
+        //• Create a class named Car and extend the class Vehicle (Car.prototype = Object.create(Vehicle.prototype); Car.prototype.constructor = Car).
+        //• Add a new method called balanceWheels to Car and print ‘Wheels are balanced’ in the function body.
+        Car.prototype = Object.create(Vehicle.prototype);
+        Car.prototype.constructor=car;
+
+        Car.prototype.balanceWheels = function(){
+        console.log("Wheel are balanced");
+        }
+        const car = new Car("Toyota");
+        car.print();
+        car.balanceWheels();
+        console.log(car.type,Vehicle)
+
+
+//        • Call balanceWheels and drive methods using a car object and verify the functionality.
+  //      • Check the static variable value and type variable value. Notice that they are not correct.
+    //    • The reason for the above behavior is that we didn’t call the parent constructor from the child class. Do this by using the call method (in Car constructor function Vehicle.call(this, type);)
+      //  • Re-validate the values.
+
+
+
+
+
+
+        function Vehicle(type) {
+        this.type = type;
+        Vehicle.VehicleCount++;
+        }
+        Vehicle.prototype.print = function () {
+        console.log(this.type + " Vehicle is driving");
+        };
+        Vehicle.VehicleCount = 0;
+        const vehicle = new Vehicle("Susuki");
+        //console.log(Vehicle.VehicleCount);
+        vehicle.print();
+        function Car(type){
+        Vehicle.call(this,type);
+        }
+        Car.prototype = Object.create(Vehicle.prototype);
+        Car.prototype.constructor = Car;
+        Car.prototype.balanceWheels = function () {
+        console.log("Wheels are balanced");
+        }
+        const car = new Car("Toyota");
+        car.print();
+        car.balanceWheels();
+        console.log(car.type, Vehicle.VehicleCount);
+
+
+        //3. Use arrow functions.
+        //4. Try exercise 1 with async/await.
+        //5. Try exercise 2 class, extends, get, set, and super keywords.
+
+        //6. Try out the following.
+        //• Create an account in one of the Git repositories (GitHub, GitLab).
+        //• Create a directory and make it Git managed.
+        //• Add a text file to the directory with some text.
+        //• Stage the file and commit the changes.
+        //• Create a remote repository corresponding to the directory.
+        //• Push the changes to the remote repository.
+        //• Try opening the file from the Git remote repository and do some changes. • Commit the changes to the remote repository. • Pull the changes to the local directory.
+
+
+
+        </script>
+    </body>
+</html>
